@@ -1,0 +1,35 @@
+// code report solution
+// 
+
+#include <vector>
+#include <algorithm>
+#include <set>
+
+using namespace std;
+
+int maxOverlap (vector<int> x1, vector<int> y1, vector<int> x2, vector<int> y2) {
+
+	set<int> xs, ys;
+
+	for (int i = 0; i < x1.size (); i++) {
+		xs.insert (x1[i]);
+		xs.insert (x2[i]);
+		ys.insert (y1[i]);
+		ys.insert (y2[i]);
+	}
+
+	int ans = 0;
+
+	for (auto x : xs) {
+		for (auto y : ys) {
+			int overlap = 0;
+			for (int i = 0; i < x1.size (); i++) {
+				if (x1[i] <= x && y1[i] <= y && x2[i] > x && y2[i] > y) overlap++;
+			}
+
+			ans = max (ans, overlap);
+		}
+	}
+
+	return ans;
+}
