@@ -10,11 +10,14 @@ using namespace std;
 class CubeStackingGame {
 public:
 
-	int res = 0, N;
-	vector<int> e, f, g, h;
-	unordered_set<int> a, b, c, d;
+	using vi  = vector<int>;
+	using usi = unordered_set<int>;
 
-	void mod (int i, int p, int q, int r, int s)
+	int res = 0, N;
+	vi  e, f, g, h;	// colors 
+	usi a, b, c, d; // stacks
+
+	void modify_stacks_then_dfs (int i, int p, int q, int r, int s)
 	{
 		if (!a.count (p) && !b.count (q) && !c.count (r) && !d.count (s))
 		{
@@ -35,17 +38,17 @@ public:
 		res = max (res, i);
 		if (i == N) return;
 
-		mod (i, e[i], f[i], g[i], h[i]);
-		mod (i, f[i], g[i], h[i], e[i]);
-		mod (i, g[i], h[i], e[i], f[i]);
-		mod (i, h[i], e[i], f[i], g[i]);
-		mod (i, h[i], g[i], f[i], e[i]);
-		mod (i, g[i], f[i], e[i], h[i]);
-		mod (i, f[i], e[i], h[i], g[i]);
-		mod (i, e[i], h[i], g[i], f[i]);
+		modify_stacks_then_dfs (i, e[i], f[i], g[i], h[i]);
+		modify_stacks_then_dfs (i, f[i], g[i], h[i], e[i]);
+		modify_stacks_then_dfs (i, g[i], h[i], e[i], f[i]);
+		modify_stacks_then_dfs (i, h[i], e[i], f[i], g[i]);
+		modify_stacks_then_dfs (i, h[i], g[i], f[i], e[i]);
+		modify_stacks_then_dfs (i, g[i], f[i], e[i], h[i]);
+		modify_stacks_then_dfs (i, f[i], e[i], h[i], g[i]);
+		modify_stacks_then_dfs (i, e[i], h[i], g[i], f[i]);
 	}
 
-	int MaximumValue (int n, vector <int> c1, vector <int> c2, vector <int> c3, vector <int> c4)
+	int MaximumValue (int n, vi c1, vi c2, vi c3, vi c4)
 	{
 		e = c1, f = c2, g = c3, h = c4, N = n;
 
@@ -53,7 +56,6 @@ public:
 
 		return res;
 	}
-
 };
 
 // un-rolled out, more STL solution
