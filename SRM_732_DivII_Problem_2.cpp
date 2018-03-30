@@ -1,5 +1,5 @@
 // code_report Solution
-// 
+// https://youtu.be/3EUxow6Ysw8
 
 #include <vector>
 #include <unordered_set>
@@ -63,23 +63,24 @@ public:
 class CubeStackingGame {
 public:
 
-	int res = 0, N;
-	vector<int> e, f, g, h;
-	vector<unordered_set<int>> s; // stacks
+	using vi  = vector<int>;
+	using vvi = vector<vi>;
 
-	void modify_stacks_then_dfs (int i, const vector<int>& c) {
+	int res = 0, N;
+	vi e, f, g, h;
+
+	void modify (int i, const vector<int>& c, vvi& s) {
 		bool perform_dfs = true;
-		for (int j = 0; j < 4; j++) if (s[j].count (c[j])) perform_dfs = false;
+		for (int j = 0; j < 4; j++) if (s[j][c[j]]) perform_dfs = false;
 
 		if (perform_dfs) {
-			vector<unordered_set<int>::iterator> to_erase (4);
-			for (int j = 0; j < 4; ++j) to_erase[j] = s[j].insert (c[j]).first;
-			dfs (i + 1);
-			for (int j = 0; j < 4; j++) s[j].erase (to_erase[j]);
+			for (int j = 0; j < 4; ++j) s[j][c[j]] = 1;
+			dfs (i + 1, s);
+			for (int j = 0; j < 4; j++) s[j][c[j]] = 0;
 		}
 	}
 
-	void dfs (int i) {
+	void dfs (int i, vvi& s) {
 		res = max (res, i);
 		if (i == N) return;
 
@@ -87,18 +88,17 @@ public:
 
 		for (int j = 0; j < 8; j++) {
 			if (j == 4) reverse (c.begin (), c.end ());
-			modify_stacks_then_dfs (i, c);
+			modify (i, c, s);
 			rotate (c.begin (), c.begin () + 1, c.end ());
 		}
 	}
 
-	int MaximumValue (int n, vector <int> c1, vector <int> c2, vector <int> c3, vector <int> c4) {
+	int MaximumValue (int n, vi c1, vi c2, vi c3, vi c4) {
 		e = c1, f = c2, g = c3, h = c4, N = n;
-		s.resize (4);
+		vvi s (4, vi (n + 1, 0));
 
-		dfs (0);
+		dfs (0, s);
 
 		return res;
 	}
-
 };
