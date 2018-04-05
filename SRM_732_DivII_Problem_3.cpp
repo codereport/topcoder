@@ -62,10 +62,9 @@ public:
 
     int MinimumMoves (int n, int m, vector<string> x)
     {
-        string colors = "wb";
         int min_flips = numeric_limits<int>::max ();
 
-        for (auto color : colors)
+        for (auto color : {'b', 'w'})
         {
             vector<string> filled_grid = x;
             for (auto& row : filled_grid) replace (row.begin (), row.end (), 'e', color);
