@@ -13,7 +13,7 @@ public:
       return abs (a / b - c);
    }
 
-   vector <int> findTriple (int x0, int x1, int x2) 
+   vector<int> findTriple (int x0, int x1, int x2) 
    {
       vector<int> v = { x0, x1, x2 }, o = { 0, 1, 2 }, ans;
 
