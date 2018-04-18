@@ -4,13 +4,12 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 
 class BuildingSpanningTreesDiv2
 {
-   const int MOD = 987654323;
+public: 
 
    void quick_union (int x, int y, vector<int>& rt, vector<int>& sz)
    {
@@ -45,6 +44,8 @@ class BuildingSpanningTreesDiv2
       long long B = comp[1] * comp[2]; // edge 2
       long long C = comp[0] * comp[2]; // edge 3
 
-      return (A*B + B*C + A*C) % MOD;
+      const int MOD = 987654323;
+      
+      return (A*B + B*C + A*C) % MOD;;
    }
 };
