@@ -9,7 +9,9 @@ using namespace std;
 
 class BuildingSpanningTreesDiv2
 {
-public: 
+public:
+
+   const int MOD = 987654323;
 
    void quick_union (int x, int y, vector<int>& rt, vector<int>& sz)
    {
@@ -20,17 +22,15 @@ public:
       sz[y] += sz[x];
    }
 
-   int getNumberOfSpanningTrees (int n, vector <int> x, vector <int> y)
+   int getNumberOfSpanningTrees (int n, vector<int> x, vector<int> y)
    {
       int m = n - 3;
 
-      // make x and y 0-indexed
-      auto minus_one = [](int i) { return i - 1; };
-      transform (x.begin (), x.end (), x.begin (), minus_one);
-      transform (y.begin (), y.end (), y.begin (), minus_one);
+      for (auto& e : x) e--; // make x 0-indexed
+      for (auto& e : y) e--; // make y 0-indexed
 
       vector<int> rt (n);    // after quick union, will store "root" of connected component
-      vector<int> sz (n, 1); // after quick union, will store "size" of each root
+      vector<int> sz (n, 1); // after quick union, will store "size" of each connected component
       iota (rt.begin (), rt.end (), 0);
 
       for (int i = 0; i < m; i++) quick_union (x[i], y[i], rt, sz);
@@ -44,8 +44,6 @@ public:
       long long B = comp[1] * comp[2]; // edge 2
       long long C = comp[0] * comp[2]; // edge 3
 
-      const int MOD = 987654323;
-      
-      return (A*B + B*C + A*C) % MOD;;
+      return (A*B + B*C + A*C) % MOD;
    }
 };
