@@ -6,25 +6,27 @@
 
 using namespace std;
 
-vector <double> findBest (const vector<int>& a) 
+vector<double> findBest (const vector<int>& a)
 {
-   int n = a.size (), start = 0, end = 0;
-   vector<double> ans (n);
-   
-   while (start < n) 
-   {
-      double sum = 0, avg = a[start], avg_j = 0;
-      
-      for (int i = start; i < n; ++i) 
-      {
-         sum += a[i];
-         avg_j = sum / (i - start + 1);
-         if (avg_j < avg) avg = avg_j, end = i;
+   vector<double> b (a.begin (), a.end ());
+   auto start = b.begin ();
+   auto end   = start;
+
+   while (start != b.end ()) {
+      auto sum   = 0.0;
+      auto avg   = *start;
+      auto avg_i = 0.0;
+
+      for (auto i = start; i != b.end (); ++i) {
+         sum  += *i;
+         avg_i = sum / (distance (start, i) + 1);
+         if (avg_i < avg) avg = avg_i, end = i + 1;
       }
 
-      fill (ans.begin () + start, ans.begin () + end + 1, avg);
-      ++end, start = end;
+      fill (start, end, avg);
+      start = end;
    }
 
-   return ans;
+   return b;
 }
+
