@@ -18,33 +18,32 @@ void dfs (vvi& v, const vs& a, int x, int y, int m)
 {
    auto is_valid = [](int x, int y) {
       return x >= 0 && x < r &&
-             y >= 0 && y < c;
+               y >= 0 && y < c;
    };
 
-   if (v[x][y] == -1 || v[x][y] > m) 
-   {
-      v[x][y] = m;
-      for (int i = 0; i < 4; ++i) {
-         int nx = x + dx[i];
-         int ny = y + dy[i];
-         if (is_valid (nx, ny)) {
+   if (!(v[x][y] == -1 || v[x][y] > m)) return;
+
+   v[x][y] = m;
+   for (int i = 0; i < 4; ++i) {
+      int nx = x + dx[i];
+      int ny = y + dy[i];
+      if (!is_valid (nx, ny)) continue;
+      if (a[nx][ny] == '.') {
+         dfs (v, a, nx, ny, m + 1);
+      } else {
+         do {
             if (a[nx][ny] == '.') {
-               dfs (v, a, nx, ny, m + 1);
-            } else {
-               do {
-                  if (a[nx][ny] == '.') {
-                     dfs (v, a, nx, ny, m + 2);
-                     break;
-                  }
-                  nx += dx[i], ny += dy[i];
-               } while (is_valid (nx, ny));
+               dfs (v, a, nx, ny, m + 2);
+               break;
             }
-         }
+            nx += dx[i], ny += dy[i];
+         } while (is_valid (nx, ny));
       }
    }
 }
 
-int pathLength (vector<string> a, int r1, int c1, int r2, int c2) 
+
+int pathLength (vs a, int r1, int c1, int r2, int c2) 
 {
    r = a.size ();
    c = a[0].size ();
