@@ -2,17 +2,11 @@
 // 
 
 #include <vector>
-#include <iostream>
-#include <algorithm>
-#include <set>
-#include <iterator>
-#include <numeric>
 
 #define FORI(s,n) for(int i = s; i < n; i++)
 #define FORJ(s,n) for(int j = s; j < n; j++)
 
 using namespace std;
-
 using vi = vector<int>;
 using vvi = vector<vi>;
 
