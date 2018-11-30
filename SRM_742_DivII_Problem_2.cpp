@@ -3,9 +3,6 @@
 
 #include <vector>
 
-#define FORI(s,n) for(int i = s; i < n; i++)
-#define FORJ(s,n) for(int j = s; j < n; j++)
-
 using namespace std;
 using vi = vector<int>;
 using vvi = vector<vi>;
@@ -14,17 +11,18 @@ class chess_board {
    vvi g;
    vi dx = { 0,  0, 1, -1, 1,  1, -1, -1 };
    vi dy = { 1, -1, 0,  0, 1, -1,  1, -1 };
+   const int DIR = 8, DIM = 50;
 
    bool is_valid(int x, int y) {
-      return x >= 0 && x < 50 && y >= 0 && y < 50;
+      return x >= 0 && x < DIM && y >= 0 && y < DIM;
    }
 
 public:
 
-   chess_board() : g(50, vi(50, 0)) {}
+   chess_board() : g(DIM, vi(DIM, 0)) {}
     
    void place_queen(int x, int y) {
-      FORI(0, 8) {
+      for (int i = 0; i < DIR; ++i) {
          int r = x, c = y;
          while (is_valid(r, c)) 
             g[r][c] = 1, r += dx[i], c += dy[i];
@@ -32,8 +30,8 @@ public:
    }
 
    pair<int,int> find_and_place_next_queen() {
-      FORI(0, 50) {
-         FORJ(0, 50) {
+      for (int i = 0; i < DIM; ++i) {
+         for (int j = 0; j < DIM; ++j) {
             if (g[i][j]) continue;
             place_queen(i, j);
             return make_pair(i, j);
