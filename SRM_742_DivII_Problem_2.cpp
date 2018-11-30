@@ -12,8 +12,8 @@ using vvi = vector<vi>;
 
 class chess_board {
    vvi g;
-   vi dx = { 0,  0, 1, -1, 1, 1, -1, -1 };
-   vi dy = { 1, -1, 0,  0, 1, -1, 1, -1 };
+   vi dx = { 0,  0, 1, -1, 1,  1, -1, -1 };
+   vi dy = { 1, -1, 0,  0, 1, -1,  1, -1 };
 
    bool is_valid(int x, int y) {
       return x >= 0 && x < 50 && y >= 0 && y < 50;
