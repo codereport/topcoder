@@ -48,7 +48,7 @@ public:
          cb.place_queen(row[i], col[i]);
       vi ans;
       while (add--) {
-         pair<int, int> p = cb.find_and_place_next_queen();
+         auto p = cb.find_and_place_next_queen();
          ans.push_back(p.first);
          ans.push_back(p.second);
       }
