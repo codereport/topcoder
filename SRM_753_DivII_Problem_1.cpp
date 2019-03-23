@@ -1,5 +1,5 @@
 // code_report Solution
-// Video Link:
+// Video Link: https://youtu.be/mdn7bsuK0Wo
 // Problem Link: https://arena.topcoder.com/#/u/practiceCode/17449/85533/15355/2/332231
 
 #include <string>
