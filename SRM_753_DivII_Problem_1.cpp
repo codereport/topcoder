@@ -8,9 +8,9 @@
 using namespace std;
 
 class KerimJavati {
-  public:
-  int howLong(string text) {
-    return accumulate(text.begin(), text.end(), 0, 
-      [](int a, char b) { return a + 2 * (b - 'a') + 1; });
-  }
+   public:
+   int howLong(string text) {
+      return accumulate(text.begin(), text.end(), 0, 
+         [](int a, char b) { return a + 2 * (b - 'a') + 1; });
+   }
 };
