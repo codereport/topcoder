@@ -4,4 +4,4 @@
 
 class KerimJavati: 
     def howLong(self, text):
-        return sum (2 * (ord(c) - ord('a')) + 1 for c in text)
+        return sum(2 * (ord(c) - ord('a')) + 1 for c in text)
