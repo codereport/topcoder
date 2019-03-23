@@ -11,5 +11,5 @@ howLong s = foldl (+) 0 $ map (\c -> 2 * (ord c - ord 'a') + 1) s
 
 -- Solution 2
 
-howLong2 :: String -> Int
-howLong2 s = foldl (\a b -> a + 2 * (ord b - ord 'a') + 1) 0 s
+howLong :: String -> Int
+howLong s = foldl (\a b -> a + 2 * (ord b - ord 'a') + 1) 0 s
