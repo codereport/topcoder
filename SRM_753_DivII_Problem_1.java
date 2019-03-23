@@ -23,7 +23,7 @@ import java.lang.String;
 public class KerimJavati {
     public int howLong(String text) {
         return text
-            	  .chars()
-            	  .reduce(0, (a, b) -> a + 2 * (b - 'a') + 1);
+            	.chars()
+            	.reduce(0, (a, b) -> a + 2 * (b - 'a') + 1);
     }
 }
